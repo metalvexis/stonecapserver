@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node ./tests",
-    "build": "rm -rf ./dist/ && ./node_modules/.bin/babel . -d .dist --ignore 'node_modules/*, tests/*'",
-    "start": "node ./.dist/",
+    "build": "rm -rf ./dist/ && ./node_modules/.bin/babel --config-file ./babel.config.json . -d .dist --ignore 'node_modules/*'",
+    "start": "node ./.dist",
     "dev": "nodemon --delay 2 --watch . --exec \"npm run build && npm start\" "
   },
   "repository": {
@@ -28,30 +27,20 @@
     "express": "^4.16.4",
     "faker": "^4.1.0",
     "jsonwebtoken": "^8.4.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "method-override": "^3.0.0",
     "mongoose": "^5.4.6",
-    "nodemailer": "^5.1.1"
+    "multer": "^1.4.2",
+    "nodemailer": "^5.1.1",
+    "winston": "^3.2.1",
+    "winston-papertrail": "https://github.com/kenperkins/winston-papertrail.git#v2"
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
     "@babel/core": "7.2.2",
     "@babel/preset-env": "7.3.1",
     "babel-eslint": "^10.0.3",
+    "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^6.4.0"
-  },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
-    ],
-    "sourceMaps": true,
-    "retainLines": true
   }
 }
