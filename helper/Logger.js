@@ -1,99 +1,91 @@
-import winston, { format } from 'winston';
-import { PapertrailConnection, PapertrailTransport } from 'winston-papertrail';
-const { combine, timestamp, label, printf, colorize } = format;
+import winston, { format } from 'winston'
+import { PapertrailTransport } from 'winston-papertrail'
+import { getPtConnection } from 'config/papertrail.js'
+const { combine, timestamp, label, printf, colorize } = format
 
-const levels = { 
-  emerg: 0, 
-  alert: 1, 
-  crit: 2, 
-  error: 3, 
-  warning: 4, 
-  notice: 5, 
-  info: 6, 
+const levels = {
+  emerg: 0,
+  alert: 1,
+  crit: 2,
+  error: 3,
+  warning: 4,
+  notice: 5,
+  info: 6,
   debug: 7
-};
+}
 
 const customPrint = printf(({ level, message, label, timestamp, service }) => {
-  return `${timestamp} [${service}::${label}] [${level}] : ${message}`;
-});
+  return `${timestamp} [${service}::${label}] [${level}] : ${message}`
+})
 
-let consoleLogger = new winston.transports.Console();
+const consoleLogger = new winston.transports.Console()
 
-const ptConnection = new PapertrailConnection({
-  host: process.env.PAPERTRAIL_HOST,
-  port: process.env.PAPERTRAIL_PORT
-});
+const attachService = format((info, opts) => {
+  if (opts.service) info.service = opts.service
 
-ptConnection.on('error', function(err) {
-  setTimeout(()=>{
-    let logger = new Logger();
-  logger.err(JSON.stringify(err));
-  },1000)
-});
+  return info
+})
 
-ptConnection.on('connect', function(message) {
-  setTimeout(()=>{
-    let logger = new Logger();
-  logger.info(message);
-  },1000)
-  
-});
-
-const attachService = format(( info, opts )=>{
-
-  if(opts.service) info.service = opts.service;
-
-  return info;
-});
-
-const moduleFormat = ({module, service}) => {
+const moduleFormat = ({ module, service }) => {
   return combine(
     colorize(),
     label({ label: module }),
     timestamp(),
     attachService({ service }),
-    customPrint,
-  );
-};
+    customPrint
+  )
+}
+
+const getLogger = ({ service, module } = {}) => {
+  const program = `[${service}::${module}]`
+  const ptConnection = getPtConnection()
+  const ptTransport = new PapertrailTransport(ptConnection, {
+    program,
+    logFormat: function (level, message) {
+      return `[${level}] : ${message}`
+    }
+  })
+
+  const logger = winston.createLogger({
+    levels,
+    colorize: true,
+    transports: [
+      consoleLogger,
+      ptTransport
+    ],
+    format: moduleFormat({ service, module })
+  })
+
+  return logger
+}
 
 export class Logger {
-  constructor({service, module} = {}){
-    
-    this.service = service || "server";
-    this.module = module || "logger";
-    let program =`[${this.service}::${this.module}]`;
-    const ptTransport = new PapertrailTransport(ptConnection,{
-      program,
-      logFormat: function(level, message) {
-        return `[${level}] : ${message}`;
-      }
-    });
-    
-    this.logger = winston.createLogger({
-      levels,
-      colorize: true,
-      transports:[
-        consoleLogger,
-        ptTransport
-      ],
-      format: moduleFormat({ module: this.module, service: this.service })
-    });
+  constructor ({ service, module } = {}) {
+    this.service = service || 'server'
+    this.module = module || 'logger'
   }
 
-  info(message){
-    this.logger['info'](message);
+  initLogger () {
+    this.logger = getLogger({ service: this.service, module: this.module })
   }
 
-  warn(message){
-    this.logger['warning'](message);
+  async info (message) {
+    if (!this.logger) this.initLogger()
+
+    this.logger.info(message)
   }
 
-  err(message){
-    this.logger['error'](message);
+  async warn (message) {
+    if (!this.logger) this.initLogger()
+
+    this.logger.warning(message)
+  }
+
+  async err (message) {
+    if (!this.logger) this.getLogger()
+
+    this.logger.error(message)
   }
 }
 
-
-
-
-export default new Logger();
+global.logger = new Logger()

@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf ./dist && ./node_modules/.bin/babel --config-file ./babel.config.json . -d .dist/ --ignore 'node_modules/*'",
-    "start": "nodemon --delay 2 --watch . --exec \"npm run build && node ./.dist\" "
+    "build": "rm -rf .dist && ./node_modules/.bin/babel --config-file ./babel.config.json . -d .dist/ --ignore 'node_modules/*'",
+    "start": "nodemon --delay 2 --watch . --exec \"npm run build && node ./.dist\" ",
+    "eslint:fix": "./node_modules/.bin/eslint --fix --format=table . | cat",
+    "eslint:fix-dry-run": "./node_modules/.bin/eslint --fix-dry-run --format=table . | cat"
   },
   "repository": {
     "type": "git",
@@ -34,7 +36,6 @@
     "pg": "^7.18.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.4",
-    "sequelize-cli": "^5.5.1",
     "winston": "^3.2.1",
     "winston-papertrail": "https://github.com/kenperkins/winston-papertrail.git#v2"
   },
@@ -44,6 +45,13 @@
     "@babel/preset-env": "7.3.1",
     "babel-eslint": "^10.0.3",
     "babel-plugin-module-resolver": "^4.0.0",
-    "eslint": "^6.4.0"
+    "eslint": "^6.4.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "sequelize-cli": "^5.5.1",
+    "standard": "^14.3.1"
   }
 }

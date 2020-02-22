@@ -1,26 +1,26 @@
-import { Logger } from 'helper/Logger.js';
+import { Logger } from 'helper/Logger.js'
 
-let logger = new Logger({service: 'stonecap', module: 'error-tracker'});
+const logger = new Logger({ service: 'stonecap', module: 'error-tracker' })
 
 // use this Error class for App specific errors
 export class StoneError extends Error {
-  constructor(statusCode, message) {
-    super();
-    this.statusCode = statusCode;
-    this.message = message;
+  constructor (statusCode, message) {
+    super()
+    this.statusCode = statusCode
+    this.message = message
   }
 }
 
 export const ErrorHandler = (err, req, res, next) => {
-  const { statusCode, message, stack } = err;
+  const { statusCode, message, stack } = err
 
-  let status = statusCode ? statusCode : 500;
+  const status = statusCode || 500
 
-  logger.err(stack);
+  logger.err(stack)
 
   res.status(status).json({
-    status: "error",
+    status: 'error',
     statusCode,
     message
-  });
-};
+  })
+}

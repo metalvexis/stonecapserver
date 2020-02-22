@@ -1,8 +1,8 @@
 // Loads .env to Environment without being added to server code
-import dotenv from "dotenv";
+import dotenv from 'dotenv'
 
-let config = dotenv.config();
+const config = dotenv.config()
 
-if(process.env.NODE_ENV !== 'production'){
+if (process.env.NODE_ENV !== 'production') {
   console.log(config.parsed)
 }

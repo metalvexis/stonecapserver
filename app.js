@@ -1,9 +1,9 @@
-import { getPgClient, getSequelizeClient } from 'config/db.js';
-import expressApp from 'config/express.js';
+import { initSequelizeClient } from './db/'
+import expressApp from 'config/express.js'
 
-async function initApp(){
-  await getSequelizeClient();
-  expressApp.start();
+async function initApp () {
+  await initSequelizeClient()
+  await expressApp.start()
 }
 
-initApp();
+initApp()
