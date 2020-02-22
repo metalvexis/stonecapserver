@@ -11,4 +11,4 @@ process.on('SIGTERM', function (er) {
   process.exit(1)
 })
 
-process.on('SIGINT', () => { process.exit() })
+// process.on('SIGINT', () => { process.exit() })
