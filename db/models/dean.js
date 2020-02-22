@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     fName: DataTypes.STRING,
     mName: DataTypes.STRING,
     lName: DataTypes.STRING,
-    address: DataTypes.STRING
+    address: DataTypes.STRING,
+    dateAssigned: DataTypes.DATE
   }, {});
   Dean.associate = function(models) {
     // associations can be defined here

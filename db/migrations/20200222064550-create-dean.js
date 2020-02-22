@@ -20,6 +20,9 @@ module.exports = {
       address: {
         type: Sequelize.STRING
       },
+      dateAssigned: {
+        type: Sequelize.DATE
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
