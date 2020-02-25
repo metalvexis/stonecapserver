@@ -82,7 +82,7 @@ export class Logger {
   }
 
   async err (message) {
-    if (!this.logger) this.getLogger()
+    if (!this.logger) this.initLogger()
 
     this.logger.error(message)
   }

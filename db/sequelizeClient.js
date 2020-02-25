@@ -1,17 +1,9 @@
-import Sequelize from 'sequelize'
 import { Logger } from 'helper/Logger.js'
+import db from 'db/models/'
 
 let isConnected = false
 
-const logger = new Logger({ service: 'server', module: 'sequelizeClient' })
-
-const client = new Sequelize(
-  process.env.DB_HOST,
-  {
-    dialect: 'postgres',
-    logging: (msg) => logger.info(msg)
-  }
-)
+const client = db.sequelize
 
 function getClient () {
   return new Promise((resolve, reject) => {
@@ -27,6 +19,8 @@ function getClient () {
         logger.err(err.stack)
         reject(err)
       }
+    } else {
+      resolve(client)
     }
   })
 }
@@ -34,3 +28,5 @@ function getClient () {
 export const sequelizeClient = {
   getClient
 }
+
+export default db // contains all Model interface defined in /db/models/

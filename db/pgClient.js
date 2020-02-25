@@ -1,3 +1,8 @@
+/**
+ *    Use this client only for raw SQL Queries
+ *    use sequelizeClient for all other DB tasks
+ */
+
 import { Client } from 'pg'
 
 const client = new Client({
