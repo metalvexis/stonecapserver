@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   ResearchProject.associate = function(models) {
     // associations can be defined here
+    ResearchProject.belongsToMany(models.Student, { through: 'Proponents', as: 'ResearchProjectId' })
   };
   return ResearchProject;
 };

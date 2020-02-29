@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Coordinator.associate = function(models) {
     // associations can be defined here
+    Coordinator.belongsTo(models.Faculty)
+    Coordinator.hasMany(models.ResearchSection)
   };
   return Coordinator;
 };

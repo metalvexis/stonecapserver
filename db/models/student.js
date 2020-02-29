@@ -15,6 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Student.associate = function(models) {
     // associations can be defined here
+    Student.belongsToMany(models.ResearchSection, { through: 'SectionStudent', foreighKey: 'StudentId' })
+    Student.belongsToMany(models.ResearchProject, { through: 'Proponents' })
   };
   return Student;
 };
