@@ -13,7 +13,11 @@ module.exports = (sequelize, DataTypes) => {
     ResearchProject.belongsToMany(models.MilestoneChecklist, { through: 'MilestoneSubmissions', foreignKey: 'ResearchProjectId' })
     ResearchProject.belongsToMany(models.Criteria, { through: 'GradingSheets', foreignKey: 'ResearchProjectId' })
 
+    ResearchProject.belongsToMany(models.Faculty, { through: 'Adviser', foreignKey: 'ResearchProjectId' })
+    ResearchProject.belongsToMany(models.Faculty, { through: 'Panelist', foreignKey: 'ResearchProjectId' })
+
     ResearchProject.hasMany(models.DefenseSchedule)
+    ResearchProject.hasMany(models.Appointment)
   };
   return ResearchProject;
 };

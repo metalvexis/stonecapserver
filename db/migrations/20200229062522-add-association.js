@@ -75,12 +75,57 @@ module.exports = {
       }
     )
 
+    var FacultyHasManyConsultationSchedule = queryInterface.addColumn(
+      'ConsultationSchedules',
+      'FacultyId',
+      {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Faculties', // name of Source model
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      }
+    )
+
+    var ResearchProjectHasManyAppointment = queryInterface.addColumn(
+      'Appointments',
+      'ResearchProjectId',
+      {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'ResearchProjects', // name of Source model
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      }
+    )
+
+    var ConsultationScheduleHasOneAppointment = queryInterface.addColumn(
+      'Appointments',
+      'ConsultationScheduleId',
+      {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'ConsultationSchedules', // name of Source model
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      }
+    )
+
     return Promise.all([
       CoordinatorBelongsToFaculty,
       CoordinatorHasManyResearchSection,
       PeriodHasManyResearchSection,
       ResearchProjectHasManyDefenseSchedule,
-      DeanHasManyResearchProject
+      DeanHasManyResearchProject,
+      FacultyHasManyConsultationSchedule,
+      ResearchProjectHasManyAppointment,
+      ConsultationScheduleHasOneAppointment
     ])
   },
 
@@ -102,7 +147,7 @@ module.exports = {
       'CoordinatorId' // key we want to remove
     )
 
-    var removeResearchSectionHasOnePeriod = queryInterface.removeColumn(
+    var removePeriodHasManyResearchSection = queryInterface.removeColumn(
       'ResearchSections', // name of Source model
       'PeriodId' // key we want to remove
     )
@@ -113,16 +158,34 @@ module.exports = {
     )
 
     var removeDeanHasManyResearchProject = queryInterface.removeColumn(
-      'ResearchProjects', // name of Source model
-      'DeanId' // key we want to remove
+      'ResearchProjects',
+      'DeanId'
     )
 
+    var removeFacultyHasManyConsultationSchedule = queryInterface.removeColumn(
+      'ConsultationSchedules',
+      'FacultyId'
+    )
+
+    var removeResearchProjectHasManyAppointment = queryInterface.removeColumn(
+      'ConsultationSchedules',
+      'FacultyId'
+    )
+
+    var removeConsultationScheduleHasOneAppointment = queryInterface.removeColumn(
+      'Appointments',
+      'ConsultationScheduleId'
+    )
+    
     return Promise.all([
       removeCoordinatorBelongsToFaculty,
       removeCoordinatorHasManyResearchSection,
-      removeResearchSectionHasOnePeriod,
+      removePeriodHasManyResearchSection,
       removeResearchProjectHasManyDefenseSchedule,
-      removeDeanHasManyResearchProject
+      removeDeanHasManyResearchProject,
+      removeFacultyHasManyConsultationSchedule,
+      removeResearchProjectHasManyAppointment,
+      removeConsultationScheduleHasOneAppointment
     ])
   }
 };

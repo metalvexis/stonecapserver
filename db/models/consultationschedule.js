@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   ConsultationSchedule.associate = function(models) {
     // associations can be defined here
+    ConsultationSchedule.hasOne(models.Appointment)
   };
   return ConsultationSchedule;
 };
