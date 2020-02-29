@@ -5,6 +5,9 @@ module.exports = {
       status: {
         type: Sequelize.STRING
       },
+      dateAdded: {
+        type: Sequelize.DATE
+      },
       dateCompleted: {
         type: Sequelize.DATE
       }

@@ -14,7 +14,7 @@ module.exports = {
       concern: {
         type: Sequelize.STRING
       },
-      prerequisites: {
+      prerequisite: {
         type: Sequelize.STRING
       }
     });

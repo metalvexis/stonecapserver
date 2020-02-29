@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     abstract: DataTypes.STRING,
     status: DataTypes.STRING,
-    published: DataTypes.BOOLEAN
+    published: DataTypes.BOOLEAN,
+    tags: DataTypes.STRING
   }, {});
   ResearchProject.associate = function(models) {
     // associations can be defined here
