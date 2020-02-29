@@ -9,7 +9,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   ResearchProject.associate = function(models) {
     // associations can be defined here
-    ResearchProject.belongsToMany(models.Student, { through: 'Proponents', as: 'ResearchProjectId' })
+    ResearchProject.belongsToMany(models.Student, { through: 'Proponents', foreignKey: 'ResearchProjectId' })
+    ResearchProject.belongsToMany(models.MilestoneChecklist, { through: 'MilestoneSubmissions', foreignKey: 'ResearchProjectId' })
+    ResearchProject.belongsToMany(models.Criteria, { through: 'GradingSheets', foreignKey: 'ResearchProjectId' })
+
+    ResearchProject.hasMany(models.DefenseSchedule)
   };
   return ResearchProject;
 };

@@ -2,11 +2,13 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('GradingSheets', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+      CriteriaId: {
+        type: Sequelize.INTEGER,
+        primaryKey: true
+      },
+      ResearchProjectId: {
+        type: Sequelize.INTEGER,
+        primaryKey: true
       },
       feedback: {
         type: Sequelize.STRING

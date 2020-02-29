@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Period.associate = function(models) {
     // associations can be defined here
+    Period.hasMany(models.ResearchSection)
   };
   return Period;
 };

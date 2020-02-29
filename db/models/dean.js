@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Dean.associate = function(models) {
     // associations can be defined here
+    Dean.hasMany(models.ResearchProject)
   };
   return Dean;
 };

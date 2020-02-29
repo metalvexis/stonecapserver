@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Criteria.associate = function(models) {
     // associations can be defined here
+    Criteria.belongsToMany(models.ResearchProject, { through: 'GradingSheets', foreignKey: 'CriteriaId' })
   };
   return Criteria;
 };

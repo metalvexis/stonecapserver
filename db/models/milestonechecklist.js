@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   MilestoneChecklist.associate = function(models) {
     // associations can be defined here
+    MilestoneChecklist.belongsToMany(models.ResearchProject, { through: 'MilestoneSubmissions', foreignKey: 'MilestoneChecklistId' })
   };
   return MilestoneChecklist;
 };

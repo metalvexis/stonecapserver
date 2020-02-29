@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   ResearchSection.associate = function(models) {
     // associations can be defined here
     ResearchSection.hasOne(models.Period)
-    ResearchSection.belongsToMany(models.Student, { through: 'SectionStudents', as: 'ResearchSectionId' })
+    ResearchSection.belongsToMany(models.Student, { through: 'SectionStudents', foreignKey: 'ResearchSectionId' })
   };
   return ResearchSection;
 };
