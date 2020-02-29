@@ -14,12 +14,6 @@ module.exports = {
       room: {
         type: Sequelize.STRING
       },
-      schoolYear: {
-        type: Sequelize.STRING
-      },
-      semester: {
-        type: Sequelize.STRING
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

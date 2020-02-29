@@ -14,12 +14,6 @@ module.exports = {
       abstract: {
         type: Sequelize.STRING
       },
-      schoolYear: {
-        type: Sequelize.STRING
-      },
-      semester: {
-        type: Sequelize.STRING
-      },
       status: {
         type: Sequelize.STRING
       },

@@ -11,12 +11,6 @@ module.exports = {
       dateTime: {
         type: Sequelize.DATE
       },
-      semester: {
-        type: Sequelize.STRING
-      },
-      schoolYear: {
-        type: Sequelize.STRING
-      },
       venue: {
         type: Sequelize.STRING
       },

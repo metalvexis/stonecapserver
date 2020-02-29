@@ -8,16 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      feedback: {
+        type: Sequelize.STRING
+      },
       concern: {
         type: Sequelize.STRING
       },
       prerequisites: {
-        type: Sequelize.STRING
-      },
-      schoolYear: {
-        type: Sequelize.STRING
-      },
-      semester: {
         type: Sequelize.STRING
       },
       createdAt: {
