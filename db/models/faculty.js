@@ -20,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     Faculty.belongsToMany(models.ResearchProject, { through: 'Adviser', foreignKey: 'FacultyId' })
     Faculty.belongsToMany(models.ResearchProject, { through: 'Panelist', foreignKey: 'FacultyId' })
 
+    Faculty.belongsToMany(models.GradingSheet, { through: 'FacultyGradingSheet', foreignKey: 'FacultyId' })
+    
     Faculty.hasMany(models.ConsultationSchedule)
   };
   return Faculty;

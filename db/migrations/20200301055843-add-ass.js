@@ -2,8 +2,6 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-
-    // Coordinator Belongs to One Faculty
     var CoordinatorBelongsToFaculty = queryInterface.addColumn(
       'Coordinators',
       'FacultyId',
@@ -18,7 +16,6 @@ module.exports = {
       }
     )
 
-    // Coordinator Has Many Research Section
     var CoordinatorHasManyResearchSection = queryInterface.addColumn(
       'ResearchSections',
       'CoordinatorId',
@@ -130,13 +127,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.dropTable('users');
-    */
     var removeCoordinatorBelongsToFaculty = queryInterface.removeColumn(
       'Coordinators', // name of Source model
       'FacultyId' // key we want to remove
@@ -168,15 +158,15 @@ module.exports = {
     )
 
     var removeResearchProjectHasManyAppointment = queryInterface.removeColumn(
-      'ConsultationSchedules',
-      'FacultyId'
+      'Appointments',
+      'ResearchProjectId'
     )
 
     var removeConsultationScheduleHasOneAppointment = queryInterface.removeColumn(
       'Appointments',
       'ConsultationScheduleId'
     )
-    
+
     return Promise.all([
       removeCoordinatorBelongsToFaculty,
       removeCoordinatorHasManyResearchSection,

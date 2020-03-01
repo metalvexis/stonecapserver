@@ -10,10 +10,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true
       },
-      feedback: {
+      decision: {
         type: Sequelize.STRING
       },
-      rating: {
+      percentage: {
         type: Sequelize.INTEGER
       },
       createdAt: {

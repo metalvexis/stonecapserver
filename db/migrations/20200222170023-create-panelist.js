@@ -3,12 +3,10 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Panelists', {
       FacultyId: {
-        type: Sequelize.INTEGER,
-        primaryKey: true
+        type: Sequelize.INTEGER
       },
       ResearchProjectId: {
-        type: Sequelize.INTEGER,
-        primaryKey: true
+        type: Sequelize.INTEGER
       },
       status: {
         type: Sequelize.STRING

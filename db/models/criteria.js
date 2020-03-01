@@ -2,8 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Criteria = sequelize.define('Criteria', {
     title: DataTypes.STRING,
-    description: DataTypes.STRING,
-    weight: DataTypes.INTEGER
+    description: DataTypes.STRING
   }, {});
   Criteria.associate = function(models) {
     // associations can be defined here
