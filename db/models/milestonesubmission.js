@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     dateAdded: DataTypes.DATE,
     dateCompleted: DataTypes.DATE
   }, {
-    timestamp: false
+    timestamps: false
   });
   MilestoneSubmission.associate = function(models) {
     // associations can be defined here

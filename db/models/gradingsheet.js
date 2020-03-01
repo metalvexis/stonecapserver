@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     decision: DataTypes.STRING,
     percentage: DataTypes.INTEGER
   }, {
-    timestamp: false
+    timestamps: false
   });
   GradingSheet.associate = function(models) {
     // associations can be defined here
