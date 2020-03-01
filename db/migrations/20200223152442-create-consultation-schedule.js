@@ -8,22 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      dateTime: {
-        type: Sequelize.DATE
-      },
+      date: Sequelize.DATE,
+      startTime: Sequelize.INTEGER, // 0 - 23
+      endTime: Sequelize.INTEGER, // 0 - 23
       room: {
         type: Sequelize.STRING
       },
       status: {
         type: Sequelize.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
   },

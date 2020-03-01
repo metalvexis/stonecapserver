@@ -1,8 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Criteria = sequelize.define('Criteria', {
-    title: DataTypes.STRING,
-    description: DataTypes.STRING
+    title: DataTypes.TEXT,
+    description: DataTypes.TEXT
   }, {});
   Criteria.associate = function(models) {
     // associations can be defined here

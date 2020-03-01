@@ -9,10 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       abstract: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       status: {
         type: Sequelize.STRING

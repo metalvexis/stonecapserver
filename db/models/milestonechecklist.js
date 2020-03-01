@@ -1,8 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const MilestoneChecklist = sequelize.define('MilestoneChecklist', {
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
+    title: DataTypes.TEXT,
+    description: DataTypes.TEXT,
     category: DataTypes.STRING
   }, {});
   MilestoneChecklist.associate = function(models) {
