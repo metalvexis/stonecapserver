@@ -13,7 +13,8 @@
   "retainLines": true,
   "ignore": [
     "node_modules",
-    ".dist"
+    ".dist",
+    ".yarn"
   ],
   "plugins": [
     ["module-resolver", {
