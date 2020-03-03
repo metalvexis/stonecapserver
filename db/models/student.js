@@ -17,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Student.belongsToMany(models.ResearchSection, { through: 'SectionStudent', foreignKey: 'StudentId' })
     Student.belongsToMany(models.ResearchProject, { through: 'Proponents', foreignKey: 'StudentId' })
+
+    Student.belongsToMany(models.Notification, { through: 'StudentNotifications', foreignKey: 'StudentId' })
   };
   return Student;
 };

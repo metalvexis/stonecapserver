@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash')
+const Password = require('../../.dist/helper/Password.js')
 
 const faker = require('faker')
 faker.seed(0)
@@ -18,7 +19,7 @@ module.exports = {
     period = period.get()
 
     let facultyList = _.range(10).map(
-      function () {
+      async function () {
         return {
           fName: faker.name.firstName(),
           mName: faker.name.lastName(),
@@ -31,16 +32,21 @@ module.exports = {
           dept: 'CS',
           status: 'Active',
           educBg: 'College',
-          password: 'test',
+          password: await Password.genPw('test'),
           createdAt: new Date(),
           updatedAt: new Date()
         }
-      })
+      }
+    )
+
+    facultyList = await Promise.all(facultyList)
+
+    console.log(JSON.stringify(facultyList))
 
     await queryInterface.bulkInsert('Faculties', facultyList)
 
     let studentList = _.range(24).map(
-      function () {
+      async function () {
         return {
           fName: faker.name.firstName(),
           mName: faker.name.lastName(),
@@ -52,11 +58,14 @@ module.exports = {
           email: faker.internet.email(),
           dept: 'CS',
           course: 'BSIT',
-          password: 'test',
+          password: await Password.genPw('test'),
           createdAt: new Date(),
           updatedAt: new Date()
         }
-      })
+      }
+    )
+
+    studentList = await Promise.all(studentList)
 
     await queryInterface.bulkInsert('Students', studentList)
 
@@ -131,8 +140,8 @@ module.exports = {
 
     await queryInterface.bulkInsert('Criteria', criteriaList)
 
-    const deanList = _.range(10).map(
-      function () {
+    let deanList = _.range(10).map(
+      async function () {
         return {
           fName: faker.name.firstName(),
           mName: faker.name.lastName(),
@@ -145,12 +154,15 @@ module.exports = {
           dept: 'CS',
           status: 'Active',
           educBg: 'College',
-          password: 'test',
+          password: await Password.genPw('test'),
           dateAssigned: new Date(),
           createdAt: new Date(),
           updatedAt: new Date()
         }
-      })
+      }
+    )
+
+    deanList = await Promise.all(deanList)
 
     await queryInterface.bulkInsert('Deans', deanList)
 
