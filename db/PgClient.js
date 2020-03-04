@@ -28,6 +28,6 @@ async function getClient () {
   return client
 }
 
-export const pgClient = {
+export const PgClient = {
   getClient
 }

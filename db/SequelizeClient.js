@@ -25,7 +25,7 @@ function getClient () {
   })
 }
 
-export const sequelizeClient = {
+export const SequelizeClient = {
   getClient
 }
 

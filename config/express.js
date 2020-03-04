@@ -1,6 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import { ErrorHandler } from 'middleware/ErrorHandler.js'
+import apiRoutes from './routes.js'
 
 const app = express()
 const port = process.env.PORT
@@ -13,6 +14,8 @@ app.use([
 app.use('/health', (req, res, next) => {
   res.sendStatus(200)
 })
+
+app.use('/api', apiRoutes)
 
 app.use(ErrorHandler) // Errors sink
 

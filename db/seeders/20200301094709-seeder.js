@@ -41,8 +41,6 @@ module.exports = {
 
     facultyList = await Promise.all(facultyList)
 
-    console.log(JSON.stringify(facultyList))
-
     await queryInterface.bulkInsert('Faculties', facultyList)
 
     let studentList = _.range(24).map(

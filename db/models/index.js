@@ -9,9 +9,9 @@ const config = require(__dirname + '/../config.js')[env];
 const db = {};
 
 let sequelize;
-// config.logging = function(message) {
-//   global.logger.info(message)
-// }
+
+config.logging = null // disable console logging of Sequelize
+
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
