@@ -2,6 +2,21 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
+    var DeanBelongsToFaculty = queryInterface.addColumn(
+      'Deans',
+      'FacultyId',
+      {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        references: {
+          model: 'Faculties', // name of Target model
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      }
+    )
+
     var CoordinatorBelongsToFaculty = queryInterface.addColumn(
       'Coordinators',
       'FacultyId',
@@ -29,7 +44,7 @@ module.exports = {
         onDelete: 'SET NULL'
       }
     )
-      
+
     var PeriodHasManyResearchSection = queryInterface.addColumn(
       'ResearchSections',
       'PeriodId',
@@ -115,6 +130,7 @@ module.exports = {
     )
 
     return Promise.all([
+      DeanBelongsToFaculty,
       CoordinatorBelongsToFaculty,
       CoordinatorHasManyResearchSection,
       PeriodHasManyResearchSection,
@@ -127,24 +143,28 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
+    var removeDeanBelongsToFaculty = queryInterface.removeColumn(
+      'Deans',
+      'FacultyId'
+    )
     var removeCoordinatorBelongsToFaculty = queryInterface.removeColumn(
-      'Coordinators', // name of Source model
-      'FacultyId' // key we want to remove
+      'Coordinators',
+      'FacultyId'
     )
 
     var removeCoordinatorHasManyResearchSection = queryInterface.removeColumn(
-      'ResearchSections', // name of Source model
-      'CoordinatorId' // key we want to remove
+      'ResearchSections',
+      'CoordinatorId'
     )
 
     var removePeriodHasManyResearchSection = queryInterface.removeColumn(
-      'ResearchSections', // name of Source model
-      'PeriodId' // key we want to remove
+      'ResearchSections',
+      'PeriodId'
     )
 
     var removeResearchProjectHasManyDefenseSchedule = queryInterface.removeColumn(
-      'DefenseSchedules', // name of Source model
-      'ResearchProjectId' // key we want to remove
+      'DefenseSchedules',
+      'ResearchProjectId'
     )
 
     var removeDeanHasManyResearchProject = queryInterface.removeColumn(
@@ -168,6 +188,7 @@ module.exports = {
     )
 
     return Promise.all([
+      removeDeanBelongsToFaculty,
       removeCoordinatorBelongsToFaculty,
       removeCoordinatorHasManyResearchSection,
       removePeriodHasManyResearchSection,

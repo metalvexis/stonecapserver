@@ -15,7 +15,9 @@ export class FacultyController extends BasicController {
     }
 
     const createCoordinator = await DbModels.Coordinator.create({
-      FacultyId
+      FacultyId,
+      dateAssigned: new Date(),
+      status: 'Active'
     })
     return createCoordinator
   }
@@ -34,7 +36,9 @@ export class FacultyController extends BasicController {
 
     const createPanelist = await DbModels.Panelist.create({
       FacultyId,
-      ResearchProjectId
+      ResearchProjectId,
+      dateAssigned: new Date(),
+      status: 'Active'
     })
     return createPanelist
   }
@@ -53,8 +57,24 @@ export class FacultyController extends BasicController {
 
     const createAdviser = await DbModels.Adviser.create({
       FacultyId,
-      ResearchProjectId
+      ResearchProjectId,
+      dateAssigned: new Date(),
+      status: 'Active'
     })
     return createAdviser
+  }
+
+  async setDean ({ FacultyId }) {
+    const faculty = await DbModels.Faculty.findByPk(FacultyId)
+
+    if (!faculty) {
+      throw new Error('FACULTY_NOT_FOUND')
+    }
+    const createDean = await DbModels.Dean.create({
+      FacultyId,
+      dateAssigned: new Date(),
+      status: 'Active'
+    })
+    return createDean
   }
 }

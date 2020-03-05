@@ -91,9 +91,7 @@ module.exports = {
         return {
           status: '',
           dateAssigned: new Date(),
-          FacultyId: Faculty.id,
-          createdAt: new Date(),
-          updatedAt: new Date()
+          FacultyId: Faculty.id
         }
       }
     )
@@ -138,32 +136,6 @@ module.exports = {
 
     await queryInterface.bulkInsert('Criteria', criteriaList)
 
-    let deanList = _.range(10).map(
-      async function () {
-        return {
-          fName: faker.name.firstName(),
-          mName: faker.name.lastName(),
-          lName: faker.name.lastName(),
-          address: faker.address.state(),
-          gender: 'F',
-          bday: faker.date.between(1990, 1992),
-          contact: faker.phone.phoneNumber(),
-          email: faker.internet.email(),
-          dept: 'CS',
-          status: 'Active',
-          educBg: 'College',
-          password: await Password.genPw('test'),
-          dateAssigned: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date()
-        }
-      }
-    )
-
-    deanList = await Promise.all(deanList)
-
-    await queryInterface.bulkInsert('Deans', deanList)
-
     const consultSchedList = []
 
     facultyList = await models.Faculty.findAll({ raw: true, limit: 6, order: queryInterface.sequelize.col('createdAt') })
@@ -203,9 +175,7 @@ module.exports = {
 
     await queryInterface.bulkDelete('Criteria', null, {})
 
-    await queryInterface.bulkDelete('Deans', null, {})
-
     await queryInterface.bulkDelete('ConsultationSchedules', null, {})
-    
+
   }
 };

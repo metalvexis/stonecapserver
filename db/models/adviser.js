@@ -1,7 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Adviser = sequelize.define('Adviser', {
-    status: DataTypes.STRING
+    status: DataTypes.STRING,
+    dateAssigned: DataTypes.DATE
   }, {
     timestamps: false
   });

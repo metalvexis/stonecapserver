@@ -1,10 +1,12 @@
 export { default as BasicController } from './BasicController.js'
 
-export { FacultyController } from './Users/FacultyController.js'
+export { FacultyController } from './User/FacultyController.js'
 
-export { StudentController } from './Users/StudentController.js'
+export { StudentController } from './User/StudentController.js'
 
-export { DeanController } from './Users/DeanController.js'
+export { DeanController } from './User/DeanController.js'
+
+export { CoordinatorController } from './User/CoordinatorController.js'
 
 export { ConsultationScheduleController } from './ConsultationScheduleController.js'
 
