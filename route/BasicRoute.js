@@ -10,15 +10,45 @@ export default class BasicRoute {
 
     const router = express.Router()
 
-    router.get('/', async (req, res) => res.send(await controller.getAll()))
+    router.get('/', async (req, res, next) => {
+      try {
+        res.send(await controller.getAll())
+      } catch (err) {
+        next(err)
+      }
+    })
 
-    router.get('/:id', async (req, res) => res.send(await controller.getOne(req.params.id)))
+    router.get('/:id', async (req, res, next) => {
+      try {
+        res.send(await controller.getOne(req.params.id))
+      } catch (err) {
+        next(err)
+      }
+    })
 
-    router.post('/create', async (req, res) => res.send(await controller.createOne(req.params.id, req.body)))
+    router.post('/create', async (req, res, next) => {
+      try {
+        res.send(await controller.createOne(req.params.id, req.body))
+      } catch (err) {
+        next(err)
+      }
+    })
 
-    router.post('/update/:id', async (req, res) => res.send(await controller.updateOne(req.params.id, req.body)))
+    router.post('/update/:id', async (req, res, next) => {
+      try {
+        res.send(await controller.updateOne(req.params.id, req.body))
+      } catch (err) {
+        next(err)
+      }
+    })
 
-    router.post('/delete/:id', async (req, res) => res.send(await controller.deleteOne(req.params.id)))
+    router.post('/delete/:id', async (req, res, next) => {
+      try {
+        res.send(await controller.deleteOne(req.params.id))
+      } catch (err) {
+        next(err)
+      }
+    })
 
     this.router = router
   }

@@ -6,46 +6,30 @@ export default class BasicController {
   }
 
   async getAll () {
-    try {
-      return await this.model.findAll()
-    } catch (err) {
-      global.logger.err(err.stack)
-    }
+    const all = await this.model.findAll()
+    return all
   }
 
   async getOne (id) {
-    try {
-      return await this.model.findByPk(id)
-    } catch (err) {
-      global.logger.err(err.stack)
-    }
+    const one = await this.model.findByPk(id)
+    return one
   }
 
   async createOne (data) {
-    try {
-      return await this.model.create(data)
-    } catch (err) {
-      global.logger.err(err.stack)
-    }
+    const createOne = await this.model.create(data)
+    return createOne
   }
 
   async updateOne (id, updateData) {
-    try {
-      return await this.model.update(updateData, { where: { id }, validate: true })
-    } catch (err) {
-      global.logger.err(err.stack)
-    }
+    const updateOne = await this.model.update(updateData, { where: { id }, validate: true })
+    return updateOne
   }
 
   async deleteOne (id) {
-    try {
-      const instance = await this.model.findByPk(id)
+    const instance = await this.model.findByPk(id)
 
-      await instance.destroy()
+    await instance.destroy()
 
-      return true
-    } catch (err) {
-      global.logger.err(err.stack)
-    }
+    return true
   }
 }

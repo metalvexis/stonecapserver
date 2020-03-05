@@ -1,7 +1,11 @@
 import BasicController from 'controller/BasicController.js'
 
-export class FacultyController extends BasicController {
+export class DeanController extends BasicController {
   constructor () {
     super('Dean')
+  }
+
+  publishResearch () {
+
   }
 }

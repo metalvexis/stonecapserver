@@ -8,9 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      date: Sequelize.DATE,
-      startTime: Sequelize.INTEGER, // 0 - 23
-      endTime: Sequelize.INTEGER, // 0 - 23
+      dateTime: Sequelize.DATE,
       room: {
         type: Sequelize.STRING
       },

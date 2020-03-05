@@ -173,14 +173,9 @@ module.exports = {
       function (faculty) {
         _.range(3).map(
           function () {
-            // startTime between 8AM to 4PM
-            const startTime = faker.random.number({ min: 8, max: 16 })
-
             consultSchedList.push({
               FacultyId: faculty.id,
-              date: new Date(),
-              startTime,
-              endTime: startTime + 1,
+              dateTime: new Date(),
               room: 'JH24',
               status: 'Active'
             })

@@ -1,6 +1,6 @@
 import BasicRoute from 'route/BasicRoute.js'
 
-import { StudentController } from 'controller/Users/StudentController.js'
+import { StudentController } from 'controller/'
 
 const student = new StudentController()
 
