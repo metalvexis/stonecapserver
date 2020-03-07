@@ -1,8 +1,8 @@
-import Password from 'helper/Password.js'
+import { Password } from 'helper/Password.js'
 
 import { DbModels } from 'db/'
 
-export class AuthController {
+export const AuthController = {
   async register ({ email, password, fName, lName, userType }) {
     if (!email || !password || !fName || !lName || !userType) throw new Error('INVALID_REGISTRATION')
 
@@ -17,14 +17,16 @@ export class AuthController {
     })
 
     return true
-  }
+  },
 
   async login ({ email, password }) {
     if (!email || !password) throw new Error('INVALID_CREDENTIALS')
-    const faculty = DbModels.Faculty.findOne({ email })
-    const student = DbModels.Student.findOne({ email })
 
-    if (!student || !faculty) {
+    const option = { where: { email } }
+    const faculty = await DbModels.Faculty.findOne(option)
+    const student = await DbModels.Student.findOne(option)
+
+    if (student === null && faculty === null) {
       throw new Error('USER_NOT_FOUND')
     }
 
@@ -32,7 +34,7 @@ export class AuthController {
 
     const isValidLogin = await Password.checkPw(password, userModel.password)
 
-    return isValidLogin
+    return { isValidLogin, user: userModel, userType: faculty ? 'faculty' : 'student' }
   }
 
 }

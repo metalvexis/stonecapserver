@@ -1,5 +1,7 @@
 export { default as BasicController } from './BasicController.js'
 
+export { AuthController } from './User/AuthController.js'
+
 export { FacultyController } from './User/FacultyController.js'
 
 export { StudentController } from './User/StudentController.js'

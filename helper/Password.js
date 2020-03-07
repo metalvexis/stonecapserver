@@ -8,3 +8,8 @@ export const genPw = async (plaintxt) => {
 export const checkPw = async (plaintxt, hash) => {
   return await bcrypt.compare(plaintxt, hash);
 }
+
+export const Password = {
+  genPw,
+  checkPw
+}

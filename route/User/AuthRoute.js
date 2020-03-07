@@ -1,4 +1,4 @@
-import BasicRoute from 'route/BasicRoute.js'
+import express from 'express'
 
 import { AuthController } from 'controller/'
 
@@ -10,11 +10,11 @@ router.post('/register', async (req, res, next) => {
   } = req.body
 
   try {
-    return await AuthController.register({ email, password, fName, lName, userType })
+    const response = await AuthController.register({ email, password, fName, lName, userType })
+    res.send(response)
   } catch (err) {
     next(err)
   }
-
 })
 
 router.post('/login', async (req, res, next) => {
@@ -23,11 +23,11 @@ router.post('/login', async (req, res, next) => {
   } = req.body
 
   try {
-    return await AuthController.login({ email, password })
+    const response = await AuthController.login({ email, password })
+    res.send(response)
   } catch (err) {
     next(err)
   }
-
 })
 
 export default router

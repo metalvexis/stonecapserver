@@ -1,5 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import { ErrorHandler } from 'middleware/ErrorHandler.js'
 import apiRoutes from './routes.js'
 
@@ -7,6 +8,7 @@ const app = express()
 const port = process.env.PORT
 
 app.use([
+  cors(),
   bodyParser.json({ type: '*/json' }),
   bodyParser.urlencoded({ extended: true })
 ])

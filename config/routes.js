@@ -1,12 +1,18 @@
 import express from 'express'
 
-import { StudentRoute, FacultyRoute, CoordinatorRoute, DeanRoute } from 'route/'
+import { AuthRoute, StudentRoute, FacultyRoute, CoordinatorRoute, DeanRoute } from 'route/'
 
 const router = express.Router()
 
-router.all('/', (req, res)=>{
+router.all('/', (req, res) => {
   res.send('Welcome to my E-Commerce API<br><br>Documentation: <a href="https://github.com/metalvexis/stonecapserver">https://github.com/metalvexis/stonecapserver</a>');
 })
+
+router.all('/failure', (req, res, next) => {
+  next(new Error('TEST'))
+})
+
+router.use('/auth', AuthRoute)
 
 router.use('/student', StudentRoute)
 
