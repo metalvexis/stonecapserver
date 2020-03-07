@@ -2,10 +2,15 @@ import { initSequelizeClient } from './db/'
 
 import expressApp from 'config/express.js'
 
+import listEndpoints from 'express-list-endpoints'
+
 async function initApp () {
   try {
     await initSequelizeClient()
-    await expressApp.start()
+    const app = await expressApp.start()
+
+    console.table(listEndpoints(app))
+
   } catch (err) {
     global.logger.err(err.stack)
   }
