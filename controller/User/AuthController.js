@@ -27,14 +27,18 @@ export const AuthController = {
     const student = await DbModels.Student.findOne(option)
 
     if (student === null && faculty === null) {
-      throw new Error('USER_NOT_FOUND')
+      return { isValidLogin: false }
     }
 
     const userModel = faculty || student
 
     const isValidLogin = await Password.checkPw(password, userModel.password)
 
-    return { isValidLogin, user: userModel, userType: faculty ? 'faculty' : 'student' }
+    if (!isValidLogin) {
+      return { isValidLogin, user: null, userType: null, roles: null }
+    }
+
+    return { isValidLogin, user: userModel, userType: faculty ? 'faculty' : 'student', roles: [] }
   }
 
 }
