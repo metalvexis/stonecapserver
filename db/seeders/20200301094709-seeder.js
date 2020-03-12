@@ -116,6 +116,10 @@ module.exports = {
       })
 
     await queryInterface.bulkInsert('ConsultationSchedules', consultSchedList)
+
+    // TODO seed defense types
+
+    // TODO seed research sections
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -132,6 +136,8 @@ module.exports = {
     await queryInterface.bulkDelete('Criteria', null, {})
 
     await queryInterface.bulkDelete('ConsultationSchedules', null, {})
+
+
 
   }
 };

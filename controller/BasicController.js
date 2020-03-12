@@ -6,7 +6,7 @@ export default class BasicController {
   }
 
   async getAll () {
-    const all = await this.model.findAll()
+    const all = await this.model.findAll({ include: { all: true }})
     return all
   }
 

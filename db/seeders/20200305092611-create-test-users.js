@@ -37,7 +37,7 @@ module.exports = {
 
     const facultyAcct1 = {
       fName: "Marvs",
-      mName: "Jamila",
+      mName: "M",
       lName: "Monteagudo",
       address: "Naga",
       gender: "M",
