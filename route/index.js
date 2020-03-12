@@ -9,3 +9,9 @@ export { default as FacultyRoute } from './User/FacultyRoute.js'
 export { default as ResearchSectionRoute } from './ResearchSectionRoute.js'
 
 export { default as PeriodRoute } from './PeriodRoute.js'
+
+export { default as ConsultationScheduleRoute } from './ConsultationScheduleRoute.js'
+
+export { default as ResearchProjectRoute } from './ResearchProjectRoute.js'
+
+

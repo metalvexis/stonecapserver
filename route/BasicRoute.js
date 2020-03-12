@@ -31,9 +31,16 @@ export default class BasicRoute {
       }
     })
 
-    router.get('/:id', async (req, res, next) => {
+    router.get('/fetch/:id?', async (req, res, next) => {
       try {
-        res.send(await controller.getOne(req.params.id))
+        if (req.params.id) {
+          res.send(await controller.getOne(req.params.id))
+          return true
+        } else if (typeof controller.all === 'function') {
+          res.send(await controller.all())
+          return true
+        }
+        return []
       } catch (err) {
         next(err)
       }
@@ -66,7 +73,7 @@ export default class BasicRoute {
     this.router = router
   }
 
-  getRoute () {
+  getRouter () {
     return this.router
   }
 }

@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { AuthRoute, StudentRoute, FacultyRoute, ResearchSectionRoute, PeriodRoute } from 'route/'
+import { AuthRoute, StudentRoute, FacultyRoute, ResearchSectionRoute, PeriodRoute, ConsultationScheduleRoute, ResearchProjectRoute } from 'route/'
 
 const router = express.Router()
 
@@ -22,4 +22,7 @@ router.use('/period', PeriodRoute)
 
 router.use('/section', ResearchSectionRoute)
 
+router.use('/researchproject', ResearchProjectRoute)
+
+router.use('/consultationschedule', ConsultationScheduleRoute)
 export default router

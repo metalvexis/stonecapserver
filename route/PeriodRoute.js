@@ -6,7 +6,7 @@ const period = new PeriodController()
 
 const basicRoute = new BasicRoute(period)
 
-const router = basicRoute.getRoute()
+const router = basicRoute.getRouter()
 
 router.post('/createPeriod', async (req, res, next) => {
   const { schoolYear, semester } = req.body

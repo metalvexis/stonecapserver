@@ -11,6 +11,7 @@ const db = {};
 let sequelize;
 
 config.logging = null // disable console logging of Sequelize
+// config.logging = (msg) => console.log(msg)
 
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);

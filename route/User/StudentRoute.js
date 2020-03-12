@@ -2,8 +2,10 @@ import BasicRoute from 'route/BasicRoute.js'
 
 import { StudentController } from 'controller/'
 
-const student = new StudentController()
+const studentController = new StudentController()
 
-const router = new BasicRoute(student)
+const basicRoute = new BasicRoute(studentController)
 
-export default router.getRoute()
+const router = basicRoute.getRouter()
+
+export default router

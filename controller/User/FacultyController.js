@@ -7,6 +7,11 @@ export class FacultyController extends BasicController {
     super('Faculty')
   }
 
+  async all () {
+    const all = await DbModels.Faculty.findAll({ include: { all: true } })
+    return all
+  }
+
   async setCoordinator ({ FacultyId }) {
     const faculty = await DbModels.Faculty.findByPk(FacultyId)
 

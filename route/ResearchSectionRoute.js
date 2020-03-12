@@ -6,7 +6,7 @@ const researchSection = new ResearchSectionController()
 
 const basicRoute = new BasicRoute(researchSection)
 
-const router = basicRoute.getRoute()
+const router = basicRoute.getRouter()
 
 router.post('/createSection', async (req, res, next) => {
   const {
