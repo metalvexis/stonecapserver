@@ -1,6 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const MilestoneSubmission = sequelize.define('MilestoneSubmission', {
+    ResearchProjectId: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
+    MilestoneChecklistId: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
     dateSubmitted: DataTypes.DATE,
     status: DataTypes.STRING
   }, {});

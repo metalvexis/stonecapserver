@@ -1,15 +1,26 @@
 import BasicController from 'controller/BasicController.js'
 
-export class ResearchProjectController extends BasicController {
+import { DbModels } from 'db/'
+
+export class ResearchSectionController extends BasicController {
   constructor () {
     super('ResearchSection')
   }
 
-  createPeriod ({ schoolYear, semester }) {
+  async createSection ({ name, FacultyId, PeriodId }) {
+    const faculty = await DbModels.Faculty.findByPk(FacultyId)
 
-  }
+    if (!faculty) {
+      return false
+    }
 
-  createSection ({ CoordinatorId, PeriodId }) {
+    const newSection = await DbModels.ResearchSection.create({ name, PeriodId })
 
+    await DbModels.Coordinator.create({
+      FacultyId: faculty.id,
+      ResearchSectionId: newSection.id,
+      dateAssigned: new Date()
+    })
+    return newSection
   }
 }

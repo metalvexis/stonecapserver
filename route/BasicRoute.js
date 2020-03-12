@@ -2,6 +2,19 @@ import express from 'express'
 
 import BasicController from 'controller/BasicController.js'
 
+/*
+  Creates boilerplate routes for a controller that implements BasicController
+  basic CRUD routes included are :
+
+  <resource>/             : Get all entries of resource
+  <resource>/:id          : Get specific item by :id of resource
+  <resource>/create       : Insert entry for resource
+  <resource>/update/:id   : Update specific entry by :id for resource
+  <resource>/delete/:id   : Delete specific entry by :id for resource
+
+  All Endpoints created by this class has no middleware and is not configured to accept any.
+*/
+
 export default class BasicRoute {
   constructor (controller) {
     if (!(controller instanceof BasicController)) {

@@ -10,4 +10,6 @@ export { ConsultationScheduleController } from './ConsultationScheduleController
 
 export { ResearchProjectController } from './ResearchProjectController.js'
 
+export { PeriodController } from './PeriodController.js'
+
 export { ResearchSectionController } from './ResearchSectionController.js'
