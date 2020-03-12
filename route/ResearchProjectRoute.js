@@ -23,7 +23,7 @@ router.post('/createAppointment', async (req, res, next) => {
   const { ResearchProjectId, ConsultationScheduleId, concern } = req.body
 
   try {
-    const newProject = await researchProject.createProject({ ResearchProjectId, ConsultationScheduleId, concern })
+    const newProject = await researchProject.createAppointment({ ResearchProjectId, ConsultationScheduleId, concern })
     res.send(newProject)
   } catch (err) {
     next(err)

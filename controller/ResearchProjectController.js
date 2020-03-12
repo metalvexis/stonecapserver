@@ -7,6 +7,10 @@ export class ResearchProjectController extends BasicController {
     super('ResearchProject')
   }
 
+  all () {
+    return DbModels.ResearchProject.findAll({ include: { all: true } })
+  }
+
   async createProject ({ studentIds, title, abstract }) {
     if (!studentIds || !title || !abstract) throw new Error('INVALID_PROJECT')
 
