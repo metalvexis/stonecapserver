@@ -32,9 +32,7 @@ module.exports = {
           dept: 'CS',
           status: 'Active',
           educBg: 'College',
-          password: await Password.genPw('test'),
-          createdAt: new Date(),
-          updatedAt: new Date()
+          password: await Password.genPw('test')
         }
       }
     )
@@ -56,9 +54,7 @@ module.exports = {
           email: faker.internet.email(),
           dept: 'CS',
           course: 'BSIT',
-          password: await Password.genPw('test'),
-          createdAt: new Date(),
-          updatedAt: new Date()
+          password: await Password.genPw('test')
         }
       }
     )
@@ -73,52 +69,18 @@ module.exports = {
           title: faker.lorem.sentence(),
           abstract: faker.lorem.sentences(),
           status: 'IP',
-          published: false,
-          tags: '',
-          createdAt: new Date(),
-          updatedAt: new Date()
+          publication: false
         }
       })
 
     await queryInterface.bulkInsert('ResearchProjects', researchList)
-
-    let coordinatorList = await models.Faculty.findAll({ limit: 4, order: queryInterface.sequelize.random() })
-
-    coordinatorList = coordinatorList.map(
-      function (model) {
-        const Faculty = model.get()
-
-        return {
-          status: '',
-          dateAssigned: new Date(),
-          FacultyId: Faculty.id
-        }
-      }
-    )
-
-    await queryInterface.bulkInsert('Coordinators', coordinatorList)
-
-    coordinatorList = await models.Coordinator.findAll({ limit: 4, order: queryInterface.sequelize.random() })
-
-    const researchSectionList = coordinatorList.map(function (model) {
-      return {
-        CoordinatorId: model.get('id'),
-        PeriodId: period.id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }
-    })
-
-    await queryInterface.bulkInsert('ResearchSections', researchSectionList)
 
     const milestoneList = _.range(10).map(
       function () {
         return {
           title: faker.lorem.sentence(),
           description: faker.lorem.sentences(),
-          category: faker.lorem.word(),
-          createdAt: new Date(),
-          updatedAt: new Date()
+          category: faker.lorem.word()
         }
       })
 
@@ -127,10 +89,8 @@ module.exports = {
     const criteriaList = _.range(10).map(
       function () {
         return {
-          title: faker.lorem.sentence(),
-          description: faker.lorem.sentences(),
-          createdAt: new Date(),
-          updatedAt: new Date()
+          title: faker.lorem.word(),
+          description: faker.lorem.sentences()
         }
       })
 
@@ -138,7 +98,7 @@ module.exports = {
 
     const consultSchedList = []
 
-    facultyList = await models.Faculty.findAll({ raw: true, limit: 6, order: queryInterface.sequelize.col('createdAt') })
+    facultyList = await models.Faculty.findAll({ raw: true, limit: 6 })
 
     // create 3 schedule for each faculty
     facultyList.forEach(
@@ -166,10 +126,6 @@ module.exports = {
     await queryInterface.bulkDelete('Students', null, {})
 
     await queryInterface.bulkDelete('ResearchProjects', null, {})
-
-    await queryInterface.bulkDelete('Coordinators', null, {})
-
-    await queryInterface.bulkDelete('ResearchSections', null, {})
 
     await queryInterface.bulkDelete('MilestoneChecklists', null, {})
 

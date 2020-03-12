@@ -18,9 +18,7 @@ module.exports = {
       email: 'emil@test.com',
       dept: 'CS',
       course: 'BSIT',
-      password: await Password.genPw('#Emil2020'),
-      createdAt: new Date(),
-      updatedAt: new Date()
+      password: await Password.genPw('#Emil2020')
     }
 
     const studentAcct2 = {
@@ -34,12 +32,8 @@ module.exports = {
       email: "james@test.com",
       dept: 'CS',
       course: 'BSIT',
-      password: await Password.genPw('#James1994'),
-      createdAt: new Date(),
-      updatedAt: new Date()
+      password: await Password.genPw('#James1994')
     }
-
-
 
     const facultyAcct1 = {
       fName: "Marvs",
@@ -53,9 +47,7 @@ module.exports = {
       dept: 'CS',
       status: 'Active',
       educBg: 'College',
-      password: await Password.genPw('test'),
-      createdAt: new Date(),
-      updatedAt: new Date()
+      password: await Password.genPw('test')
     }
 
     return Promise.all([
