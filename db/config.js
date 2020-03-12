@@ -2,16 +2,22 @@ module.exports = {
   development: {
     use_env_variable: 'DB_HOST',
     dialect: 'postgres',
-    timestamps: false
+    define: {
+      timestamps: false
+    }
   },
   test: {
     use_env_variable: 'DB_HOST',
     dialect: 'postgres',
-    timestamps: false
+    define: {
+      timestamps: false
+    }
   },
   production: {
     use_env_variable: 'DB_HOST',
     dialect: 'postgres',
-    timestamps: false
+    define: {
+      timestamps: false
+    }
   }
 }
