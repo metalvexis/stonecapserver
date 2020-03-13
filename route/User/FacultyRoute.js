@@ -18,16 +18,6 @@ router.post('/setCoordinator', async (req, res, next) => {
   }
 })
 
-router.post('/setCoordinator', async (req, res, next) => {
-  const { FacultyId } = req.body
-  try {
-    await facultyController.setCoordinator({ FacultyId })
-    res.sendStatus(200)
-  } catch (err) {
-    next(err)
-  }
-})
-
 router.post('/setDean', async (req, res, next) => {
   const { FacultyId } = req.body
   try {

@@ -7,6 +7,10 @@ export class ResearchSectionController extends BasicController {
     super('ResearchSection')
   }
 
+  all () {
+    return DbModels.ResearchSection.findAll({ include: { all: true } })
+  }
+
   async createSection ({ name, FacultyId, PeriodId }) {
     const faculty = await DbModels.Faculty.findByPk(FacultyId)
 
