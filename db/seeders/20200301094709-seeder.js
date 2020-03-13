@@ -11,7 +11,7 @@ const models = require('../models')
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Periods', [{
-      semester: 'summer',
+      semester: '2',
       schoolYear: '2019'
     }])
 

@@ -11,6 +11,15 @@ export class PeriodController extends BasicController {
     if (!schoolYear || !semester) {
       throw new Error('INVALID_PERIOD')
     }
+
+    const periodExists = DbModels.Period.findOne({
+      where: {
+        schoolYear, semester
+      }
+    })
+
+    if (periodExists) throw new Error('PERIOD_EXISTS')
+
     const newPeriod = await DbModels.Period.create({ schoolYear, semester })
     return newPeriod
   }

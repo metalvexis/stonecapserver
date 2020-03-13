@@ -29,7 +29,7 @@ export default class BasicController {
   }
 
   async getOne (id) {
-    const one = await this.model.findByPk(id)
+    const one = await this.model.findByPk(id, { include: { all: true } })
     return one
   }
 
