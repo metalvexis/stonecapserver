@@ -108,7 +108,7 @@ module.exports = {
             consultSchedList.push({
               FacultyId: faculty.id,
               dateTime: new Date(),
-              room: 'JH24',
+              venue: 'JH24',
               status: 'Active'
             })
           }

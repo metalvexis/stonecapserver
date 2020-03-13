@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const ConsultationSchedule = sequelize.define('ConsultationSchedule', {
     dateTime: DataTypes.DATE,
-    room: DataTypes.STRING,
+    venue: DataTypes.STRING,
     status: DataTypes.STRING
   }, {});
   ConsultationSchedule.associate = function(models) {

@@ -15,7 +15,7 @@ module.exports = {
       dateTime: {
         type: Sequelize.DATE
       },
-      room: {
+      venue: {
         type: Sequelize.STRING
       },
       status: {
