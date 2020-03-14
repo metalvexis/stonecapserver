@@ -40,6 +40,9 @@ module.exports = {
       },
       password: {
         type: Sequelize.STRING
+      },
+      studentRefId: {
+        type: Sequelize.STRING
       }
     });
   },

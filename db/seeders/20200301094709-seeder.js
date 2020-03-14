@@ -41,6 +41,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('Faculties', facultyList)
 
+
     let studentList = _.range(24).map(
       async function () {
         return {
@@ -54,7 +55,11 @@ module.exports = {
           email: faker.internet.email(),
           dept: 'CS',
           course: 'BSIT',
-          password: await Password.genPw('test')
+          password: await Password.genPw('test'),
+          studentRefId: faker.random.number({
+            min: 1000,
+            max: 10000
+          })
         }
       }
     )

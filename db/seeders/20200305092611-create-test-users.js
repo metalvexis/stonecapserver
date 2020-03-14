@@ -18,7 +18,11 @@ module.exports = {
       email: 'emil@test.com',
       dept: 'CS',
       course: 'BSIT',
-      password: await Password.genPw('#Emil2020')
+      password: await Password.genPw('#Emil2020'),
+      studentRefId: faker.random.number({
+        min: 1000,
+        max: 10000
+      })
     }
 
     const studentAcct2 = {
@@ -32,7 +36,11 @@ module.exports = {
       email: "james@test.com",
       dept: 'CS',
       course: 'BSIT',
-      password: await Password.genPw('#James1994')
+      password: await Password.genPw('#James1994'),
+      studentRefId: faker.random.number({
+        min: 1000,
+        max: 10000
+      })
     }
 
     const facultyAcct1 = {

@@ -17,7 +17,7 @@ export class ResearchProjectController extends BasicController {
     const newProject = await DbModels.ResearchProject.create({
       title,
       abstract,
-      status: 'Approved',
+      status: 'IP',
       approval: false,
       publication: false
     })

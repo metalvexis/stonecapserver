@@ -21,4 +21,16 @@ router.post('/createSection', async (req, res, next) => {
   }
 })
 
+router.get('/:id/enrollee', async (req, res, next) => {
+  const {
+    id
+  } = req.params
+
+  try {
+    const enrollees = await researchSection.getEnrollees({ ResearchSectionId: id })
+    res.send(enrollees)
+  } catch (err) {
+    next(err)
+  }
+})
 export default router
