@@ -10,11 +10,11 @@ const router = basicRoute.getRouter()
 
 router.post('/createSchedule', async (req, res, next) => {
   const {
-    FacultyId, dateTime, room
+    FacultyId, dateTime, venue, recurring
   } = req.body
 
   try {
-    const newSchedule = await consultationSchedule.createSchedule({ FacultyId, dateTime, room })
+    const newSchedule = await consultationSchedule.createSchedule({ FacultyId, dateTime, venue, recurring })
     res.send(newSchedule)
   } catch (err) {
     next(err)

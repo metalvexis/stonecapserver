@@ -13,6 +13,11 @@ app.use([
   bodyParser.urlencoded({ extended: true })
 ])
 
+app.use((req, res, next) => {
+  global.logger.info(`[${req.method}] ${req.originalUrl}`)
+  next()
+})
+
 app.use('/health', (req, res, next) => {
   res.sendStatus(200)
 })

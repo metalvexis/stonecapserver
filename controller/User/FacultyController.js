@@ -82,4 +82,9 @@ export class FacultyController extends BasicController {
     })
     return createDean
   }
+
+  async getSchedConsultation ({ FacultyId }) {
+    const faculty = await DbModels.Faculty.findByPk(FacultyId, { include: [DbModels.ConsultationSchedule] })
+    return faculty.ConsultationSchedules
+  }
 }
