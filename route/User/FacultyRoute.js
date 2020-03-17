@@ -60,4 +60,16 @@ router.get('/:id/schedule/consultation', async (req, res, next) => {
   }
 })
 
+router.get('/:id/section', async (req, res, next) => {
+  try {
+    if (req.params.id) {
+      res.send(await facultyController.getSection({ FacultyId: req.params.id }))
+    } else {
+      res.send([])
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
 export default router

@@ -87,4 +87,9 @@ export class FacultyController extends BasicController {
     const faculty = await DbModels.Faculty.findByPk(FacultyId, { include: [DbModels.ConsultationSchedule] })
     return faculty.ConsultationSchedules
   }
+
+  async getSection ({ FacultyId }) {
+    const faculty = await DbModels.Faculty.findByPk(FacultyId, { include: [DbModels.ResearchSection] })
+    return faculty.ResearchSections
+  }
 }

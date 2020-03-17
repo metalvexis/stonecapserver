@@ -37,15 +37,16 @@ export class ResearchSectionController extends BasicController {
       return false
     }
 
-    const { fName, mName, lName, email, contact, gender } = enrollee
+    const { fName, mName, lName, email, contact, gender, studentRefId } = enrollee
 
-    let newEnrollee = await DbModels.Student.findAll({
+    let newEnrollee = await DbModels.Student.findOne({
       where: {
         email: enrollee.email
-      }
+      },
+      raw: true
     })
 
-    if (!newEnrollee.length) {
+    if (!newEnrollee) {
       newEnrollee = await DbModels.Student.create({
         fName,
         mName,
@@ -55,15 +56,25 @@ export class ResearchSectionController extends BasicController {
         gender,
         dept: 'CS',
         course: 'BSIT',
-        password: await Password.genPw('NewPass123')
+        password: await Password.genPw('NewPass123'),
       })
     }
 
-    DbModels.Enrollment.create({
-      ResearchSectionId: section.id,
-      StudentId: newEnrollee.id,
-      dateEnrolled: new Date()
+    const isEnrollee = await DbModels.Enrollment.findOne({
+      where: {
+        ResearchSectionId: section.id,
+        StudentId: newEnrollee.id
+      },
+      raw: true
     })
+
+    if (!isEnrollee) {
+      DbModels.Enrollment.create({
+        ResearchSectionId: section.id,
+        StudentId: newEnrollee.id,
+        dateEnrolled: new Date()
+      })
+    }
 
     return section
   }

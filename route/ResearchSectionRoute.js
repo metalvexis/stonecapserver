@@ -33,4 +33,17 @@ router.get('/:id/enrollee', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/:id/addEnrollee', async (req, res, next) => {
+  const {
+    ResearchSectionId, enrollee
+  } = req.body
+
+  try {
+    const enrollees = await researchSection.addEnrollee({ ResearchSectionId, enrollee })
+    res.send(enrollees)
+  } catch (err) {
+    next(err)
+  }
+})
 export default router
