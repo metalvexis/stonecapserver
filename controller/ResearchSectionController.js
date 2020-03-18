@@ -57,6 +57,7 @@ export class ResearchSectionController extends BasicController {
         dept: 'CS',
         course: 'BSIT',
         password: await Password.genPw('NewPass123'),
+        studentRefId
       })
     }
 
