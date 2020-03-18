@@ -39,15 +39,15 @@ export class ResearchSectionController extends BasicController {
 
     const { fName, mName, lName, email, contact, gender, studentRefId } = enrollee
 
-    let newEnrollee = await DbModels.Student.findOne({
+    let existingEnrollee = await DbModels.Student.findOne({
       where: {
         email: enrollee.email
       },
       raw: true
     })
 
-    if (!newEnrollee) {
-      newEnrollee = await DbModels.Student.create({
+    if (!existingEnrollee) {
+      existingEnrollee = await DbModels.Student.create({
         fName,
         mName,
         lName,
@@ -61,19 +61,46 @@ export class ResearchSectionController extends BasicController {
       })
     }
 
-    const isEnrollee = await DbModels.Enrollment.findOne({
+    const isEnrolled = await DbModels.Enrollment.findOne({
       where: {
         ResearchSectionId: section.id,
-        StudentId: newEnrollee.id
+        StudentId: existingEnrollee.id
       },
       raw: true
     })
 
-    if (!isEnrollee) {
+    if (!isEnrolled) {
       DbModels.Enrollment.create({
         ResearchSectionId: section.id,
-        StudentId: newEnrollee.id,
+        StudentId: existingEnrollee.id,
         dateEnrolled: new Date()
+      })
+    }
+
+    const existingSection = await DbModels.ResearchSection.findOne({
+      where: {
+        id: {
+          [DbModels.Sequelize.Op.ne]: section.id
+        }
+      },
+      include: [
+        {
+          model: DbModels.Student,
+          where: {
+            id: existingEnrollee.id
+          }
+        }
+      ]
+    })
+
+    console.log({existingSection, sectionId: section.id, studentId: existingEnrollee.id})
+
+    if (existingSection) {
+      await DbModels.Enrollment.destroy({
+        where: {
+          ResearchSectionId: existingSection.id,
+          StudentId: existingEnrollee.id
+        }
       })
     }
 

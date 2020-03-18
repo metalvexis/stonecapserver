@@ -44,4 +44,12 @@ export class ResearchProjectController extends BasicController {
 
     return newAppointment
   }
+
+  async addProponent ({ ResearchProjectId, StudentId }) {
+    return DbModels.Proponent.create({
+      ResearchProjectId,
+      StudentId,
+      dateProposed: new Date()
+    })
+  }
 }

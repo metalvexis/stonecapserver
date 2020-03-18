@@ -30,4 +30,16 @@ router.post('/createAppointment', async (req, res, next) => {
   }
 })
 
+router.post('/addProponent', async (req, res, next) => {
+  const { ResearchProjectId, StudentId } = req.body
+
+  try {
+    const newProject = await researchProject.addProponent({ ResearchProjectId, StudentId })
+    res.send(newProject)
+  } catch (err) {
+    next(err)
+  }
+})
+// addProponent
+
 export default router

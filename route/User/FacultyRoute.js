@@ -72,4 +72,16 @@ router.get('/:id/section', async (req, res, next) => {
   }
 })
 
+router.get('/:id/project', async (req, res, next) => {
+  try {
+    if (req.params.id) {
+      res.send(await facultyController.getProject({ FacultyId: req.params.id }))
+    } else {
+      res.send([])
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
 export default router

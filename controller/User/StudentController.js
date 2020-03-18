@@ -22,7 +22,7 @@ export class StudentController extends BasicController {
   async getProject ({ StudentId }) {
     const student = await DbModels.Student.findByPk(StudentId, { include: { all: true } })
 
-    if (!student) throw new Error('STUDENT_NOT_FOUND')
+    if (!student) return []
 
     return student.ResearchProjects
   }
