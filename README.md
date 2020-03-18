@@ -19,7 +19,7 @@ WIP Thesis Project Management Tool - Backend Service
 npm install nodemon --global
 ```
 
-1. Install dependencies
+2. Install dependencies
 ```
 npm install
 ```
@@ -27,6 +27,23 @@ npm install
 3. Start server
 ```
 npm run start
+```
+
+# Generate seed data
+
+1. Setup connection to db
+```
+export DB_HOST=postgres://<user>:<password>@localhost:5432/jp_dev
+```
+
+2. Create tables
+```
+npx db:migrate
+```
+
+3. Seed database
+```
+npx db:seed:undo:all
 ```
 
 # Endpoints
