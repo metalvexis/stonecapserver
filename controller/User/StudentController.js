@@ -21,7 +21,7 @@ export class StudentController extends BasicController {
 
   async getProject ({ StudentId }) {
     const student = await DbModels.Student.findByPk(StudentId, { include: { all: true } })
-
+    console.log({student})
     if (!student) return []
 
     return student.ResearchProjects

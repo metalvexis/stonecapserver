@@ -80,7 +80,7 @@ export class FacultyController extends BasicController {
   }
 
   async getSchedConsultation ({ FacultyId }) {
-    const faculty = await DbModels.Faculty.findByPk(FacultyId, { include: [DbModels.ConsultationSchedule] })
+    const faculty = await DbModels.Faculty.findByPk(FacultyId, { include: { all: true } })
     return faculty.ConsultationSchedules
   }
 

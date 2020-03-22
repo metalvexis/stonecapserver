@@ -23,7 +23,15 @@ export default class BasicRoute {
 
     const router = express.Router()
 
-    router.get('/', async (req, res, next) => {
+    // router.get('/', async (req, res, next) => {
+    //   try {
+    //     res.send(await controller.getAll())
+    //   } catch (err) {
+    //     next(err)
+    //   }
+    // })
+
+    router.get('/all', async (req, res, next) => {
       try {
         res.send(await controller.getAll())
       } catch (err) {
@@ -40,7 +48,7 @@ export default class BasicRoute {
           res.send(await controller.all())
           return true
         }
-        return []
+        return false
       } catch (err) {
         next(err)
       }
