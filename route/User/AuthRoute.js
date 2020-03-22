@@ -2,6 +2,8 @@ import express from 'express'
 
 import { AuthController } from 'controller/'
 
+import { Email } from 'helper/Email.js'
+
 const router = express.Router()
 
 router.post('/register', async (req, res, next) => {
@@ -10,8 +12,18 @@ router.post('/register', async (req, res, next) => {
   } = req.body
 
   try {
-    const response = await AuthController.register({ email, password, fName, lName, userType })
-    res.send(response)
+    const isRegistered = await AuthController.register({ email, password, fName, lName, userType })
+
+    if (isRegistered) {
+      const mail = Email.createMessage({
+        to: email,
+        subject: 'User Registration',
+        text: `You can now login to the system using your email and your password is ${password}`
+      })
+      await mail.send()
+    }
+
+    res.send(true)
   } catch (err) {
     next(err)
   }

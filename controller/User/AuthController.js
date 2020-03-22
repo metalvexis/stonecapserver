@@ -6,35 +6,50 @@ export const AuthController = {
   async register ({ email, password, fName, lName, userType }) {
     if (!email || !password || !fName || !lName || !userType) throw new Error('INVALID_REGISTRATION')
 
-    const userModel = userType === 'faculty' ? DbModels.Faculty : DbModels.Student
+    const { user } = await findUserByEmail(email)
 
-    password = await Password.genPw(password)
-    await userModel.create({
-      password,
-      email,
-      fName,
-      lName
-    })
+    if (!user) {
+      const userModel = userType === 'faculty' ? DbModels.Faculty : DbModels.Student
 
-    return true
+      password = await Password.genPw(password)
+      await userModel.create({
+        password,
+        email,
+        fName,
+        lName
+      })
+
+      return true
+    }
+
+    return false
   },
 
   async login ({ email, password }) {
     if (!email || !password) throw new Error('INVALID_CREDENTIALS')
 
-    const option = { where: { email } }
-    const faculty = await DbModels.Faculty.findOne(option)
-    const student = await DbModels.Student.findOne(option)
+    const { user, userType } = await findUserByEmail(email)
 
-    if (student === null && faculty === null) {
+    if (user === null) {
       return { isValidLogin: false, user: null, userType: null }
     }
 
-    const userModel = faculty || student
+    const isValidLogin = await Password.checkPw(password, user.password)
 
-    const isValidLogin = await Password.checkPw(password, userModel.password)
-
-    return { isValidLogin, user: userModel, userType: faculty ? 'faculty' : 'student' }
+    return { isValidLogin, user, userType }
   }
 
+}
+
+async function findUserByEmail (email) {
+  const option = { where: { email } }
+  const faculty = await DbModels.Faculty.findOne(option)
+  const student = await DbModels.Student.findOne(option)
+
+  const existingUser = faculty || student
+
+  return {
+    user: existingUser,
+    userType: faculty ? 'faculty' : 'student'
+  }
 }

@@ -4,6 +4,8 @@ import { Password } from 'helper/Password.js'
 
 import { DbModels } from 'db/'
 
+import { Email } from 'helper/Email.js'
+
 export class ResearchSectionController extends BasicController {
   constructor () {
     super('ResearchSection')
@@ -59,6 +61,14 @@ export class ResearchSectionController extends BasicController {
         password: await Password.genPw('NewPass123'),
         studentRefId
       })
+
+      const mail = Email.createMessage({
+        to: email,
+        subject: 'User Registration',
+        text: `You can now login to the system using your email and your password is ${existingEnrollee.password}`
+      })
+
+      await mail.send()
     }
 
     const isEnrolled = await DbModels.Enrollment.findOne({
@@ -93,7 +103,7 @@ export class ResearchSectionController extends BasicController {
       ]
     })
 
-    console.log({existingSection, sectionId: section.id, studentId: existingEnrollee.id})
+    console.log({ existingSection, sectionId: section.id, studentId: existingEnrollee.id })
 
     if (existingSection) {
       await DbModels.Enrollment.destroy({
