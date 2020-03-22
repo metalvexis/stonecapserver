@@ -30,12 +30,12 @@ router.post('/createAppointment', async (req, res, next) => {
   }
 })
 
-router.post('/addProponent', async (req, res, next) => {
-  const { ResearchProjectId, StudentId } = req.body
+router.post('/setProponent', async (req, res, next) => {
+  const { ResearchProjectId, StudentIds } = req.body
 
   try {
-    const newProject = await researchProject.addProponent({ ResearchProjectId, StudentId })
-    res.send(newProject)
+    const proponent = await researchProject.setProponent({ ResearchProjectId, StudentIds })
+    res.send(proponent)
   } catch (err) {
     next(err)
   }

@@ -65,7 +65,7 @@ export class ResearchSectionController extends BasicController {
       const mail = Email.createMessage({
         to: email,
         subject: 'User Registration',
-        text: `You can now login to the system using your email and your password is ${existingEnrollee.password}`
+        text: 'You can now login to the system using your email and your password is NewPass123'
       })
 
       await mail.send()
@@ -102,8 +102,6 @@ export class ResearchSectionController extends BasicController {
         }
       ]
     })
-
-    console.log({ existingSection, sectionId: section.id, studentId: existingEnrollee.id })
 
     if (existingSection) {
       await DbModels.Enrollment.destroy({

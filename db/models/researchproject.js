@@ -9,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   ResearchProject.associate = function(models) {
     // associations can be defined here
-    ResearchProject.belongsToMany(models.Faculty, { through: 'Advisers', foreignKey: 'ResearchProjectId' })
+    ResearchProject.belongsToMany(models.Faculty, { through: 'Advisers', foreignKey: 'ResearchProjectId', as: 'ProjectAdvisers' })
 
-    ResearchProject.belongsToMany(models.Faculty, { through: 'Panelists', foreignKey: 'ResearchProjectId' })
+    ResearchProject.belongsToMany(models.Faculty, { through: 'Panelists', foreignKey: 'ResearchProjectId', as: 'ProjectPanelists' })
 
     ResearchProject.belongsToMany(models.Student, { through: 'Proponents', foreignKey: 'ResearchProjectId' })
 

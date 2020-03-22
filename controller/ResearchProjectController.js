@@ -45,11 +45,28 @@ export class ResearchProjectController extends BasicController {
     return newAppointment
   }
 
-  async addProponent ({ ResearchProjectId, StudentId }) {
-    return DbModels.Proponent.create({
-      ResearchProjectId,
-      StudentId,
-      dateProposed: new Date()
+  async setProponent ({ ResearchProjectId, StudentIds }) {
+    if (!StudentIds.length) throw new Error('STUDENT_REQUIRED')
+
+    const query = {
+      where: {
+        ResearchProjectId
+      }
+    }
+    const existingProponents = await DbModels.Proponent.findAll(query)
+
+    console.log({Before: existingProponents})
+    if (existingProponents) DbModels.Proponent.destroy(query)
+    console.log({After: existingProponents})
+
+    const tasks = StudentIds.map(async (StudentId) => {
+      return DbModels.Proponent.create({
+        ResearchProjectId,
+        StudentId,
+        dateProposed: new Date()
+      })
     })
+
+    return Promise.all(tasks)
   }
 }
