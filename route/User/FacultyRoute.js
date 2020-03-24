@@ -39,9 +39,9 @@ router.post('/setAdviser', async (req, res, next) => {
 })
 
 router.post('/setPanelist', async (req, res, next) => {
-  const { FacultyId, ResearchProjectId } = req.body
+  const { FacultyIds, ResearchProjectId } = req.body
   try {
-    await facultyController.setPanelist({ FacultyId, ResearchProjectId })
+    await facultyController.setPanelist({ FacultyIds, ResearchProjectId })
     res.sendStatus(200)
   } catch (err) {
     next(err)

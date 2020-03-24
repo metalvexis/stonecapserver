@@ -55,9 +55,7 @@ export class ResearchProjectController extends BasicController {
     }
     const existingProponents = await DbModels.Proponent.findAll(query)
 
-    console.log({Before: existingProponents})
     if (existingProponents) DbModels.Proponent.destroy(query)
-    console.log({After: existingProponents})
 
     const tasks = StudentIds.map(async (StudentId) => {
       return DbModels.Proponent.create({

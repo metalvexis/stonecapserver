@@ -27,9 +27,21 @@ export class FacultyController extends BasicController {
     return createCoordinator
   }
 
-  async setPanelist ({ FacultyId, ResearchProjectId }) {
-    const faculty = await DbModels.Faculty.findByPk(FacultyId)
+  async setPanelist ({ FacultyIds, ResearchProjectId }) {
+    const faculty = await DbModels.Faculty.findAll({
+      where: {
+        id: {
+          [DbModels.Sequelize.Op.in]: FacultyIds
+        }
+      }
+    })
     const research = await DbModels.ResearchProject.findByPk(ResearchProjectId)
+
+    const query = {
+      where: {
+        ResearchProjectId
+      }
+    }
 
     if (!faculty) {
       throw new Error('FACULTY_NOT_FOUND')
@@ -39,13 +51,23 @@ export class FacultyController extends BasicController {
       throw new Error('RESEARCH_NOT_FOUND')
     }
 
-    const createPanelist = await DbModels.Panelist.create({
-      FacultyId,
-      ResearchProjectId,
-      dateAssigned: new Date(),
-      status: 'Active'
+    const existingPanelists = await DbModels.Proponent.findAll(query)
+
+    if (existingPanelists) DbModels.Panelist.destroy(query)
+
+    const createPanelists = FacultyIds.map(FacultyId => {
+      const createPanelist = DbModels.Panelist.create({
+        FacultyId,
+        ResearchProjectId,
+        dateAssigned: new Date(),
+        status: 'Active'
+      })
+
+      return createPanelist
     })
-    return createPanelist
+
+    const result = await Promise.all(createPanelists)
+    return result
   }
 
   async setAdviser ({ FacultyId, ResearchProjectId }) {
