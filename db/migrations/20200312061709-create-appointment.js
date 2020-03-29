@@ -24,6 +24,9 @@ module.exports = {
       },
       feedback: {
         type: Sequelize.TEXT
+      },
+      status: {
+        type: Sequelize.STRING
       }
     });
   },

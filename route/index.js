@@ -14,4 +14,4 @@ export { default as ConsultationScheduleRoute } from './ConsultationScheduleRout
 
 export { default as ResearchProjectRoute } from './ResearchProjectRoute.js'
 
-
+export { default as AppointmentRoute } from './AppointmentRoute.js'

@@ -51,7 +51,7 @@ module.exports = {
       gender: "M",
       bday: new Date('1994-03-30'),
       contact: faker.phone.phoneNumber(),
-      email: "marvs@test.com",
+      email: "metalvackal@gmail.com",
       dept: 'CS',
       status: 'Active',
       educBg: 'College',
