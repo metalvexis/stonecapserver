@@ -56,7 +56,7 @@ export default class BasicRoute {
 
     router.post('/create', async (req, res, next) => {
       try {
-        res.send(await controller.createOne(req.params.id, req.body))
+        res.send(await controller.createOne(req.body))
       } catch (err) {
         next(err)
       }

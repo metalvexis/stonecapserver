@@ -12,7 +12,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      ResearchProjectId: {
+      PanelistId: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
