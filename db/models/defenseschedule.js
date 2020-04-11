@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   DefenseSchedule.associate = function(models) {
     // associations can be defined here
+    DefenseSchedule.belongsTo(models.ResearchProject)
+
+    DefenseSchedule.belongsTo(models.DefenseType)
   };
   return DefenseSchedule;
 };

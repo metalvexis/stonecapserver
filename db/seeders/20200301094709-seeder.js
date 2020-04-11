@@ -123,6 +123,18 @@ module.exports = {
     await queryInterface.bulkInsert('ConsultationSchedules', consultSchedList)
 
     // TODO seed defense types
+    const defenseTypeList = [
+      {
+        category: 'title'
+      },
+      {
+        category: 'preliminary'
+      },
+      {
+        category: 'final'
+      }
+    ]
+    await queryInterface.bulkInsert('DefenseTypes', defenseTypeList)
 
     // TODO seed research sections
   },
