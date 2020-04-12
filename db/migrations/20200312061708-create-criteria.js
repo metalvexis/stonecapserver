@@ -15,7 +15,12 @@ module.exports = {
         type: Sequelize.TEXT
       },
       percentage: {
-        type: Sequelize.NUMERIC(2, 2)
+        type: Sequelize.NUMERIC(4, 2),
+        defaultValue: 1
+      },
+      sequence: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       }
     });
   },

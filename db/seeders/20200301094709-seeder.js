@@ -95,7 +95,9 @@ module.exports = {
       function () {
         return {
           title: faker.lorem.word(),
-          description: faker.lorem.sentences()
+          description: faker.lorem.sentences(),
+          percentage: 1,
+          sequence: 1
         }
       })
 

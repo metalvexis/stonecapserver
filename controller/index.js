@@ -17,3 +17,7 @@ export { ResearchSectionController } from './ResearchSectionController.js'
 export { AppointmentController } from './AppointmentController.js'
 
 export { CriteriaController } from './CriteriaController.js'
+
+export { GradingSheetController } from './GradingSheetController.js'
+
+export { DefenseScheduleController } from './DefenseScheduleController.js'

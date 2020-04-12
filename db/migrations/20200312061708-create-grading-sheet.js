@@ -16,11 +16,18 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      ResearchProjectId: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       rating: {
-        type: Sequelize.NUMERIC(2, 2)
+        type: Sequelize.NUMERIC(4, 2)
       },
       decision: {
         type: Sequelize.TEXT
+      },
+      status: {
+        type: Sequelize.STRING
       }
     });
   },

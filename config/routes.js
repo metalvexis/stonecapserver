@@ -1,11 +1,22 @@
 import express from 'express'
 
-import { AuthRoute, StudentRoute, FacultyRoute, ResearchSectionRoute, PeriodRoute, ConsultationScheduleRoute, ResearchProjectRoute, AppointmentRoute, CriteriaRoute } from 'route/'
+import {
+  AuthRoute,
+  StudentRoute,
+  FacultyRoute,
+  ResearchSectionRoute,
+  PeriodRoute,
+  ConsultationScheduleRoute,
+  ResearchProjectRoute,
+  AppointmentRoute,
+  CriteriaRoute,
+  GradingSheetRoute,
+  DefenseScheduleRoute } from 'route/'
 
 const router = express.Router()
 
 router.all('/', (req, res) => {
-  res.send('Welcome to my E-Commerce API<br><br>Documentation: <a href="https://github.com/metalvexis/stonecapserver">https://github.com/metalvexis/stonecapserver</a>');
+  res.send('Welcome to my E-Commerce API<br><br>Documentation: <a href="https://github.com/metalvexis/stonecapserver">https://github.com/metalvexis/stonecapserver</a>')
 })
 
 router.all('/failure', (req, res, next) => {
@@ -29,4 +40,9 @@ router.use('/consultationschedule', ConsultationScheduleRoute)
 router.use('/appointment', AppointmentRoute)
 
 router.use('/criteria', CriteriaRoute)
+
+router.use('/gradingsheet', GradingSheetRoute)
+
+router.use('/defenseschedule', DefenseScheduleRoute)
+
 export default router

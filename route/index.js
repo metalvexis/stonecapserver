@@ -17,3 +17,7 @@ export { default as ResearchProjectRoute } from './ResearchProjectRoute.js'
 export { default as AppointmentRoute } from './AppointmentRoute.js'
 
 export { default as CriteriaRoute } from './CriteriaRoute.js'
+
+export { default as GradingSheetRoute } from './GradingSheetRoute.js'
+
+export { default as DefenseScheduleRoute } from './DefenseScheduleRoute.js'

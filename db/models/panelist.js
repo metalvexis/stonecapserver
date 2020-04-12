@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING
   }, {});
   Panelist.associate = function(models) {
-    // associations can be defined here
+    Panelist.belongsTo(models.Faculty)
+    Panelist.belongsTo(models.ResearchProject)
+
     Panelist.belongsToMany(models.Criteria, { through: 'GradingSheets', foreignKey: 'PanelistId' })
   };
   return Panelist;

@@ -9,8 +9,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER
     },
+    ResearchProjectId: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
     rating: DataTypes.NUMERIC(2, 2),
-    decision: DataTypes.TEXT
+    decision: DataTypes.TEXT,
+    status: DataTypes.STRING
   }, {});
   GradingSheet.associate = function(models) {
     // associations can be defined here

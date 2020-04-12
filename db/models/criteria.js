@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const Criteria = sequelize.define('Criteria', {
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
-    percentage: DataTypes.NUMERIC(2, 2)
+    percentage: DataTypes.NUMERIC(2, 2),
+    sequence: DataTypes.INTEGER
   }, {});
   Criteria.associate = function(models) {
     // associations can be defined here
