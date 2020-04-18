@@ -15,10 +15,10 @@ module.exports = {
       gender: 'M',
       bday: faker.date.between(1995, 2000),
       contact: faker.phone.phoneNumber(),
-      email: 'emil@test.com',
+      email: 'bustineraemil@gmail.com',
       dept: 'CS',
       course: 'BSIT',
-      password: await Password.genPw('#Emil2020'),
+      password: await Password.genPw('NewPass123'),
       studentRefId: faker.random.number({
         min: 1000,
         max: 10000
@@ -27,16 +27,34 @@ module.exports = {
 
     const studentAcct2 = {
       fName: "James",
-      mName: "Jamila",
+      mName: faker.name.lastName(),
       lName: "Saballegue",
       address: "Pacol",
       gender: "M",
       bday: new Date('1994-03-30'),
       contact: faker.phone.phoneNumber(),
-      email: "james@test.com",
+      email: "jp.saballegue@gmail.com",
       dept: 'CS',
       course: 'BSIT',
-      password: await Password.genPw('#James1994'),
+      password: await Password.genPw('NewPass123'),
+      studentRefId: faker.random.number({
+        min: 1000,
+        max: 10000
+      })
+    }
+
+    const studentAcct3 = {
+      fName: "Mark",
+      mName: faker.name.lastName(),
+      lName: "Rustia",
+      address: "Pacol",
+      gender: "M",
+      bday: new Date('1994-03-30'),
+      contact: faker.phone.phoneNumber(),
+      email: "markRustia@gmail.com",
+      dept: 'CS',
+      course: 'BSIT',
+      password: await Password.genPw('NewPass123'),
       studentRefId: faker.random.number({
         min: 1000,
         max: 10000
@@ -59,7 +77,7 @@ module.exports = {
     }
 
     return Promise.all([
-      await queryInterface.bulkInsert('Students', [studentAcct1, studentAcct2]),
+      await queryInterface.bulkInsert('Students', [studentAcct1, studentAcct2, studentAcct3]),
       await queryInterface.bulkInsert('Faculties', [facultyAcct1])
     ])
   },

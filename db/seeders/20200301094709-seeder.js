@@ -124,7 +124,6 @@ module.exports = {
 
     await queryInterface.bulkInsert('ConsultationSchedules', consultSchedList)
 
-    // TODO seed defense types
     const defenseTypeList = [
       {
         category: 'title'
@@ -138,7 +137,15 @@ module.exports = {
     ]
     await queryInterface.bulkInsert('DefenseTypes', defenseTypeList)
 
-    // TODO seed research sections
+    // TODO seed two research sections
+    const sectionList = [
+      {
+        PeriodId: period.id,
+        name: 'Test Section 1'
+      }
+    ]
+    await queryInterface.bulkInsert('ResearchSections', sectionList)
+
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -156,7 +163,8 @@ module.exports = {
 
     await queryInterface.bulkDelete('ConsultationSchedules', null, {})
 
+    await queryInterface.bulkDelete('DefenseTypes', null, {})
 
-
+    await queryInterface.bulkDelete('ResearchSections', null, {})
   }
 };
