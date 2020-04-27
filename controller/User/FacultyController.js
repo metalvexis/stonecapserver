@@ -106,6 +106,113 @@ export class FacultyController extends BasicController {
     return faculty.ConsultationSchedules
   }
 
+  async getSchedDefense ({ FacultyId }) {
+    const asCoordinator = await DbModels.Faculty.findByPk(FacultyId, {
+      include: [
+        {
+          required: false,
+          model: DbModels.ResearchSection,
+          include: [
+            {
+              model: DbModels.Student,
+              include: [
+                {
+                  model: DbModels.ResearchProject
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    })
+
+    const asPanelist = await DbModels.Panelist.findAll({
+      where: {
+        FacultyId
+      },
+      include: [
+        {
+          model: DbModels.ResearchProject
+        }
+      ]
+    })
+
+    const panelProjectIds = [];
+
+    asPanelist.map(panel => {
+      panel = panel.get()
+      panelProjectIds.push(panel.ResearchProject.id)
+    })
+
+    const seenPanelProjectIds = new Set()
+
+    const filteredPanelProjectIds = panelProjectIds.filter(id => {
+      const duplicate = seenPanelProjectIds.has(id)
+      seenPanelProjectIds.add(id)
+      return !duplicate
+    })
+
+    const taskGetPanelSched = filteredPanelProjectIds.map(async (projectId) => {
+      return DbModels.DefenseSchedule.findAll({
+        where: {
+          ResearchProjectId: projectId
+        },
+        include: [
+          {
+            model: DbModels.DefenseType
+          }
+        ]
+      })
+    })
+
+    const schedAsPanelist = await Promise.all(taskGetPanelSched)
+
+    const sections = asCoordinator.ResearchSections
+
+    const researchProjectIds = []
+    sections.forEach(section => {
+      const sec = section.get()
+      sec.Students.forEach(student => {
+        const stud = student.get()
+        stud.ResearchProjects.map(researchProject => {
+          const research = researchProject.get({ plain: true })
+          console.log({ research })
+          researchProjectIds.push(research.id)
+        })
+      })
+    })
+
+    // Remove duplicate elem/objects in array
+    const seen = new Set()
+
+    const filteredProjectIds = researchProjectIds.filter(id => {
+      const duplicate = seen.has(id)
+      seen.add(id)
+      return !duplicate
+    })
+
+    const taskGetAllSchedule = filteredProjectIds.map(async (projectId) => {
+      return DbModels.DefenseSchedule.findAll({
+        where: {
+          ResearchProjectId: projectId
+        },
+        include: [
+          {
+            model: DbModels.DefenseType
+          }
+        ]
+      })
+    })
+
+    const schedules = await Promise.all(taskGetAllSchedule)
+    const schedAsCoordinator = schedules.reduce((acc, schedule) => acc.concat(schedule), [])
+
+    return {
+      asCoordinator: schedAsCoordinator,
+      asPanelist: schedAsPanelist
+    }
+  }
+
   async getSection ({ FacultyId }) {
     const faculty = await DbModels.Faculty.findByPk(FacultyId, { include: [DbModels.ResearchSection] })
     return faculty.ResearchSections

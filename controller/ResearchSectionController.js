@@ -116,7 +116,7 @@ export class ResearchSectionController extends BasicController {
   }
 
   async getEnrollees ({ ResearchSectionId }) {
-    const section = await DbModels.ResearchSection.findByPk(ResearchSectionId, { include:[DbModels.Student] })
+    const section = await DbModels.ResearchSection.findByPk(ResearchSectionId, { include: [DbModels.Student] })
 
     return section.Students || []
   }

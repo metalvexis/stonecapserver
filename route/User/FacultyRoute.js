@@ -60,6 +60,18 @@ router.get('/:id/schedule/consultation', async (req, res, next) => {
   }
 })
 
+router.get('/:id/schedule/defense', async (req, res, next) => {
+  try {
+    if (req.params.id) {
+      res.send(await facultyController.getSchedDefense({ FacultyId: req.params.id }))
+    } else {
+      res.send([])
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:id/section', async (req, res, next) => {
   try {
     if (req.params.id) {
