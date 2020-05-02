@@ -19,6 +19,17 @@ router.post('/createProject', async (req, res, next) => {
   }
 })
 
+router.post('/updateProject', async (req, res, next) => {
+  const { ResearchProjectId, title, abstract } = req.body
+
+  try {
+    const newProject = await researchProject.updateProject({ ResearchProjectId, title, abstract })
+    res.send(newProject)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/createAppointment', async (req, res, next) => {
   const { ResearchProjectId, ConsultationScheduleId, concern } = req.body
 

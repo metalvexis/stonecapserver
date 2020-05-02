@@ -78,6 +78,12 @@ export class FacultyController extends BasicController {
       throw new Error('INVALID_PARAMS')
     }
 
+    await DbModels.Adviser.destroy({
+      where: {
+        ResearchProjectId
+      }
+    })
+
     const createAdviser = await DbModels.Adviser.create({
       FacultyId,
       ResearchProjectId,

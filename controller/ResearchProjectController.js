@@ -35,6 +35,28 @@ export class ResearchProjectController extends BasicController {
     return newProject
   }
 
+  async updateProject ({ ResearchProjectId, title, abstract }) {
+    if (!ResearchProjectId || !title || !abstract) throw new Error('INVALID_REQUEST')
+
+    const existingProject = await DbModels.ResearchProject.findByPk(ResearchProjectId, { include: { all: true } })
+
+    if (!existingProject) throw new Error('INVALID_PROJECT')
+
+    const updateProject = await DbModels.ResearchProject.update({
+      title,
+      abstract,
+      status: 'IP',
+      approval: false,
+      publication: false
+    }, {
+      where: {
+        id: ResearchProjectId
+      }
+    })
+
+    return updateProject
+  }
+
   async createAppointment ({ ResearchProjectId, ConsultationScheduleId, concern }) {
     if (!ResearchProjectId || !ConsultationScheduleId || !concern) throw new Error('INVALID_APPOINTMENT')
 
